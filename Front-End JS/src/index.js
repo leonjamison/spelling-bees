@@ -6,6 +6,7 @@ let clockDiv = document.getElementById("game-clock-div")
 // console.log(counter)
 // console.log(submitBttn)
 const wordListUrl = "http://localhost:3000/words"
+const usersUrl = "http://localhost:3000/users"
 
 document.addEventListener('DOMContentLoaded', function (){
     console.log("LETS SAVE THESE BEES!!")
@@ -34,5 +35,33 @@ function fetchWordList() {
         .then(words => console.log(words))
     }
 
-fetchWordList()
+// fetchWordList()
+
+// function startGame () {
+    //   const currentGame = createNewGame(); //create game w/o a username
+//     const currentPlayer = assignUserName(); //assign currentUser.id to currentGame
+//     //create new Game instance to access points 
+//     //assign currentPlayer.id to Game
+//     const currentGamePoints = cure
+    
+
+// }
+
+// function assignUserName() { 
+    
+//     fetch(usersUrl, {
+//         method: "POST", 
+//         headers: { 
+//             "content-type": "application/json",
+//             "accept": "application/json"
+//         },
+//             body: JSON.stringify(currentUser.id) // assign new player id to this event (game)
+//         })
+//             .then(response => response.json())
+//             .then(user => console.log(user))          
+// }
+
+// assignUserName()
+
+
 
