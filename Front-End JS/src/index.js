@@ -1,4 +1,3 @@
-// Buttons
 const submitBttn = document.getElementById('login-submit')
 const playBttn = document.getElementById('play-button')
 const definitionBttn = document.getElementById('definition-button')
@@ -18,16 +17,13 @@ let clockDiv = document.getElementById("game-clock-div")
 let score = document.getElementById("game-score")
 let countdown
 
-// console.log(counter)
 const wordListUrl = "http://localhost:3000/words"
 
-// console.log(fetchWordList())
 document.addEventListener('DOMContentLoaded', function (){
     console.log("LETS SAVE THESE BEES!!")
 
     document.addEventListener('click', (e) => {
         e.preventDefault()
-     // console.log(e.target)
         if (e.target === submitBttn){
             console.log("KILL THEM ALL!")
             let player = userName.value
@@ -45,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function (){
 
 //renderWord is function to display specific word properties
 function renderWord(word){
-    // let div = document.createElement('div')
     gameDisplay.innerHTML = `
         <div class = "displayed-word" hidden>
             ${word.word}
@@ -56,7 +51,7 @@ function renderWord(word){
         <div class = "pronunciation">
             ${word.pronunciation}
         </div>
-        <div class = "sentence">
+        <div class = "sentence" hidden>
             Example: ${word.example_sentence}
         </div>
         <div class = "part-of-speech">
@@ -78,7 +73,6 @@ function getRandomWord() {
     )   
 } 
 
-// EnableButtons activates buttons once a player clicks 'play'
 function enableButtons(){
     // playBttn.textContent = "FINAL ANSWER"
     finalAnswerBttn.disabled = false
@@ -97,7 +91,7 @@ function timer(){
         document.getElementById("game-clock").textContent = counter
         if (counter <= 0)
             console.log("Hi") 
-            // alert("Game over")
+            alert("Game over")
         },1000)
 }
 
@@ -109,13 +103,11 @@ function newRound() {
     enableButtons()
     getRandomWord().then(randomWordObject => { 
         renderWord(randomWordObject)
-        // compareUserResponse(randomWordObject.word)        
      })
 } 
 
 function compareUserResponse(word) { 
         let displayedWord = document.querySelector(".displayed-word") 
-        console.log(word.value, "a", displayedWord.textContent.replace(/\s+/g,''))         
         if (word.value === displayedWord.textContent.replace(/\s+/g,'')) { 
             let parsedScore = parseInt(score.innerText) 
             parsedScore += 1
@@ -123,8 +115,6 @@ function compareUserResponse(word) {
             gameDisplay.innerHTML = ""
             return newRound()
         } else {
-            // ("Unfortnately, your answer was incorrect.")
-            console.log("Answer is incorrect!")
             gameDisplay.innerHTML = "" 
             return newRound()
         }
