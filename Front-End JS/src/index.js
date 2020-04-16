@@ -18,69 +18,38 @@ let clockDiv = document.getElementById("game-clock-div")
 let score = document.getElementById("game-score")
 let countdown
 
-
 // console.log(counter)
 const wordListUrl = "http://localhost:3000/words"
 
 // console.log(fetchWordList())
-
 document.addEventListener('DOMContentLoaded', function (){
     console.log("LETS SAVE THESE BEES!!")
 
     document.addEventListener('click', (e) => {
         e.preventDefault()
      // console.log(e.target)
-     if (e.target === submitBttn){
-         console.log("KILL THEM ALL!")
-        let player = userName.value
-        playBttn.disabled = false
-     } else if (e.target === userName){
-        console.log('Enter Username')     
-     } else if (e.target === playBttn){
-        //Start Timer
-        // timer()
-        //Enable Buttons
-        // enableButtons()
-        //Start Game
-        newRound()
-    
-        
-        
-            // if(userWordInput === word.name){
-            //     //render new word and incremement score by 1
-            // }else{
-            //     //say incorrect, try again
-            // }
-        //After word is displayed, grab text input from user, validate it; if correct..increase score by one and render new word; incorrect..say "incorrect, try again" and clear userinput field
-        console.log('LETS GET STARTED!')
+        if (e.target === submitBttn){
+            console.log("KILL THEM ALL!")
+            let player = userName.value
+            playBttn.disabled = false
+        } else if (e.target === userName){
+            console.log('Enter Username')     
+        } else if (e.target === playBttn){
+            newRound()
+            console.log('LETS GET STARTED!')
+        } else if (e.target === finalAnswerBttn) { 
+            compareUserResponse(userWordInput)     
         }
     })
 })
 
-//A function that handles the fetching of the words, picking of a random word, rendering of the word, and the authentication of the word, along with point incrementation
-// function newGame() {  
-    
-// }
-
-
-
-// fetchWordList is function to fetch all words from backend
-// function getRandomWord() { 
-//         fetch(wordListUrl) 
-//         .then(response => response.json())
-//             // console.log(response)
-//         .then(words => {
-//             const randomWordObject = words[Math.floor(Math.random() * words.length)]  
-//             // const randomWord = randomWordObject.word
-//             return randomWordObject
-//         }
-//     )          
-// } 
-
 //renderWord is function to display specific word properties
 function renderWord(word){
-    const div = document.createElement('div')
-    div.innerHTML = `
+    // let div = document.createElement('div')
+    gameDisplay.innerHTML = `
+        <div class = "displayed-word" hidden>
+            ${word.word}
+        </div>
         <div class = "definition">
             Definition: ${word.definition}
         </div>
@@ -97,17 +66,14 @@ function renderWord(word){
             Origin: ${word.language_of_origin}
         </div>
         `
-    gameDisplay.append(div)  
 }
 
 function getRandomWord() { 
     return fetch(wordListUrl) 
-    .then(response => response.json())
-        // console.log(response)
-    .then(words => {
-        let randomWordObject = words[Math.floor(Math.random() * words.length)]  
-        // const randomWord = randomWordObject.word
-        return randomWordObject
+        .then(response => response.json())
+        .then(words => {
+            let randomWordObject = words[Math.floor(Math.random() * words.length)]  
+            return randomWordObject
         }
     )   
 } 
@@ -123,46 +89,43 @@ function enableButtons(){
     // originBttn.disabled = false 
 }
 
-// Timer for countdown
 function timer(){
-    // restart timer 
     clearInterval(countdown)
-    countdown = setInterval(function(){
+    countdown = setInterval(function(){        
         counter--;
         (counter == 1) ? document.getElementById("plural").textContent = "" : document.getElementById("plural").textContent = "s"
         document.getElementById("game-clock").textContent = counter
-        if (counter <= 0) 
-            clearInterval(countdown)
-            //end of round message
-            //newRound()
+        if (counter <= 0)
+            console.log("Hi") 
+            // alert("Game over")
         },1000)
 }
 
 function newRound() {
     playBttn.disabled = true
-    wordInputField.value=""
-    // reset timer
+    wordInputField.value=""       
 
     timer()
     enableButtons()
     getRandomWord().then(randomWordObject => { 
         renderWord(randomWordObject)
-        finalAnswerBttn.addEventListener("click", (e) => {   
-            if (e.target === finalAnswerBttn) {
-                if (userWordInput.value === randomWordObject.word) {                    
-                    let parsedScore = parseInt(score.innerHTML)
-                    console.log(score.innerHTML)
-                    parsedScore += 1
-                    score.innerHTML = parsedScore
-                    gameDisplay.removeChild(gameDisplay.childNodes[0]) 
-                    return newRound()
-                } else {
-                    // ("Unfortnately, your answer was incorrect.")
-                    gameDisplay.removeChild(gameDisplay.childNodes[0]) 
-                    return newRound()
-                }}
-            }
-        )
-    })
-}   
+        // compareUserResponse(randomWordObject.word)        
+     })
+} 
 
+function compareUserResponse(word) { 
+        let displayedWord = document.querySelector(".displayed-word") 
+        console.log(word.value, "a", displayedWord.textContent.replace(/\s+/g,''))         
+        if (word.value === displayedWord.textContent.replace(/\s+/g,'')) { 
+            let parsedScore = parseInt(score.innerText) 
+            parsedScore += 1
+            score.innerText = parsedScore
+            gameDisplay.innerHTML = ""
+            return newRound()
+        } else {
+            // ("Unfortnately, your answer was incorrect.")
+            console.log("Answer is incorrect!")
+            gameDisplay.innerHTML = "" 
+            return newRound()
+        }
+    }
