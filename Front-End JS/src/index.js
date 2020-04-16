@@ -37,11 +37,7 @@ document.addEventListener('DOMContentLoaded', function (){
      } else if (e.target === userName){
         console.log('Enter Username')     
      } else if (e.target === playBttn){
-        //Start Timer
-        // timer()
-        //Enable Buttons
-        // enableButtons()
-        //Start Game
+       
         newRound()
     
         
@@ -79,25 +75,23 @@ document.addEventListener('DOMContentLoaded', function (){
 
 //renderWord is function to display specific word properties
 function renderWord(word){
-    const div = document.createElement('div')
-    div.innerHTML = `
+    // const div = document.createElement('div')
+    gameDisplay.innerHTML = `
         <div class = "definition">
-            Definition: ${word.definition}
+            DEFINITION: ${word.definition}
         </div>
         <div class = "pronunciation">
-            ${word.pronunciation}
+           PRONUNCIATION: "${word.pronunciation}"
         </div>
-        <div class = "sentence">
-            Example: ${word.example_sentence}
+        <div class = 'origin'>
+            ORIGIN: ${word.language_of_origin}
         </div>
         <div class = "part-of-speech">
             ${word.part_of_speech}
         </div>
-        <div class = 'origin'>
-            Origin: ${word.language_of_origin}
-        </div>
+       
         `
-    gameDisplay.append(div)  
+    // gameDisplay.append(div)  
 }
 
 function getRandomWord() { 
@@ -132,8 +126,9 @@ function timer(){
         (counter == 1) ? document.getElementById("plural").textContent = "" : document.getElementById("plural").textContent = "s"
         document.getElementById("game-clock").textContent = counter
         if (counter <= 0) 
-            clearInterval(countdown)
-            //end of round message
+            // clearInterval(countdown)
+            alert("GAME OVER");
+       
             //newRound()
         },1000)
 }
@@ -152,7 +147,7 @@ function newRound() {
                 if (userWordInput.value === randomWordObject.word) {                    
                     let parsedScore = parseInt(score.innerHTML)
                     console.log(score.innerHTML)
-                    parsedScore += 1
+                    parsedScore =+ 1
                     score.innerHTML = parsedScore
                     gameDisplay.removeChild(gameDisplay.childNodes[0]) 
                     return newRound()
