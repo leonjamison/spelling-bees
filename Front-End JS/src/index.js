@@ -5,7 +5,7 @@ const pronunciationBttn = document.getElementById('pronunciation-button')
 const sentenceBttn = document.getElementById('sentence-button')
 const partOfSpeechBttn = document.getElementById('part-of-speech-button')
 const originBttn = document.getElementById('origin-button')
-const allButtons = document.querySelectorAll("#ui button yellow")
+const allButtons = document.querySelectorAll(".ui button yellow")
 const finalAnswerBttn = document.getElementById("final-answer-button")
 
 let wordInputField = document.getElementById('word-input-field')
@@ -25,9 +25,11 @@ document.addEventListener('DOMContentLoaded', function (){
     document.addEventListener('click', (e) => {
         e.preventDefault()
         if (e.target === submitBttn){
+           
             console.log("KILL THEM ALL!")
-            let player = userName.value
+            // let player = userName.value
             playBttn.disabled = false
+            document.getElementById('login-field').value = ''
         } else if (e.target === userName){
             console.log('Enter Username')     
         } else if (e.target === playBttn){
@@ -45,15 +47,18 @@ function renderWord(word){
         <div class = "displayed-word" hidden>
             ${word.word}
         </div>
-        <div class = "definition">
-            DEFINITION: ${word.definition}
-        </div>
         <div class = "pronunciation">
            PRONUNCIATION: "${word.pronunciation}"
         </div>
+
+        <div class = "definition">
+            DEFINITION: ${word.definition}
+        </div>
+        
         <div class = "sentence" hidden>
             Example: ${word.example_sentence}
         </div>
+        
         <div class = "part-of-speech">
             ${word.part_of_speech}
         </div>
@@ -87,9 +92,7 @@ function timer(){
         counter--;
         (counter == 1) ? document.getElementById("plural").textContent = "" : document.getElementById("plural").textContent = "s"
         document.getElementById("game-clock").textContent = counter
-        if (counter <= 0)
-            console.log("Hi") 
-            alert("Game over")
+        if (counter <= 0) gameOver()   
         },1000)
 }
 
@@ -117,3 +120,8 @@ function compareUserResponse(word) {
             return newRound()
         }
     }
+
+function gameOver(){
+    clearInterval(countdown)
+    alert("GAME OVERRRRR ...THE BEE'S ARE DEAD SUCKA!!! (Refresh Page to StartOver)")
+}
