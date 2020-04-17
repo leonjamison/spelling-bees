@@ -50,7 +50,6 @@ function renderWord(word){
         <div class = "pronunciation">
            PRONUNCIATION: "${word.pronunciation}"
         </div>
-
         <div class = "definition">
             DEFINITION: ${word.definition}
         </div>
@@ -123,5 +122,5 @@ function compareUserResponse(word) {
 
 function gameOver(){
     clearInterval(countdown)
-    alert("GAME OVERRRRR ...THE BEE'S ARE DEAD SUCKA!!! (Refresh Page to StartOver)")
+    alert("Your spelling prowess is unrivaled! You should bee proud! (Refresh page to save some more!)")
 }

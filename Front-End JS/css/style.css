@@ -1,6 +1,7 @@
 .game-title {
     font-size: 1.5em;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /* text-shadow: 0px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+    color: #000000;
   }
   
   #game-clock-div {
@@ -10,6 +11,13 @@
     margin-top: 1em;
     font-weight: bold;
     font-size: 1.3em;
+    color: #000000;
+    background: #FFFFFF
+    
+  }
+
+  #left-menu{ 
+    background: #FFFF00
   }
   
   #game-score-div {
@@ -19,6 +27,9 @@
     /* padding-right: -1.5em; */
     font-weight: bold;
     font-size: 1.3em;
+    background: #FFFFFF;
+    color: #000000 
+    
   }
   
   #word-submit-confirm {
@@ -32,7 +43,9 @@
     width: 52em;
     height: 100%;
     align-self: center;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+    background: #FFFF00;
+    color: #000000   
   }
 
   #final-answer-button {
@@ -41,11 +54,13 @@
     width: 52em;
     height: 100%;
     align-self: center;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background: #FFFF00;
+    color: #000000   
+    /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
   }
   
   #game-container {
-    background: #f2f557ce;
+    background: #FFFFFF;
     margin: 1em 1em 1em 2em;
     width: 52em;
     height: 32em;
@@ -102,5 +117,17 @@
   }
   
   #pusher {
-    background-color: papayawhip;
+    background-color: rgb(252, 252, 252);
+  }
+
+  #rules-icon { 
+    color: #000000 
+  }
+
+  #top-score-icon { 
+    color: #000000 
+  }
+
+  #volume-icon { 
+    color: #000000 
   }
